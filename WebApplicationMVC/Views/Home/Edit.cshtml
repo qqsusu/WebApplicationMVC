@@ -1,0 +1,34 @@
+﻿@model WebApplicationMVC.Models.User
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>修改USER</h2>
+<form class="form-horizontal" role="form" method="post" action="/Home/Edit">
+    <div class="container">
+        <div class="invisible" >
+            @Html.LabelFor(model => model.Id, new { @class = "col-form-label" })
+            @Html.TextBoxFor(model => model.Id, new { @class = "form-control", @id = "Id", @value = "@Model.Id" })
+        </div>
+        <div class="col-sm-offset-1 col-sm-4">
+            @Html.LabelFor(model => model.UserName, new { @class = "col-form-label" })
+            @Html.TextBoxFor(model => model.UserName, new { @class = "form-control", @id = "UserName", @value = "@Model.UserName" })
+        </div>
+        <div class="col-sm-offset-1 col-sm-4">
+            @Html.LabelFor(model => model.Age, new { @class = "col-form-label" })
+            @Html.TextBoxFor(model => model.Age, new { @class = "form-control", @id = "Age", @value = "@Model.Age" })
+        </div>
+        <div class="col-sm-offset-1 col-sm-4">
+            @Html.LabelFor(model => model.Birthday, new { @class = "col-form-label" })
+            @Html.TextBoxFor(model => model.Birthday, new { @class = "form-control", @type = "date", @id = "Birthday", @value = "@Model.Birthday" })
+        </div>
+        <div class="row">
+            <br>
+            <div class="col-sm-offset-5 col-sm-6">
+                <button type="submit" class="btn btn-primary">Save </button>
+            </div>
+        </div>
+    </div>
+</form>
+

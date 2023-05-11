@@ -1,0 +1,91 @@
+﻿@using System.Data
+@using WebApplicationMVC.Models
+@model WebApplicationMVC.Models.User
+@{
+    ViewBag.Title = "Demo";
+}
+
+<h2>Demo</h2>
+<form name="theLeaveForm" id="theLeaveForm" class="form-horizontal" role="form" method="post" action="@Url.Action("AddUser","Home")">
+    <div class="container">
+        <div class="col-sm-offset-1 col-sm-4">
+            @Html.LabelFor(model => model.UserName, new { @class = "col-form-label" })
+            @Html.TextBoxFor(model => model.UserName, new { @class = "form-control", @id = "UserName" })
+        </div>
+        <div class="col-sm-offset-1 col-sm-4">
+            @Html.LabelFor(model => model.Age, new { @class = "col-form-label" })
+            @Html.TextBoxFor(model => model.Age, new { @class = "form-control", @id = "Age" })
+        </div>
+        <div class="col-sm-offset-1 col-sm-4">
+            @Html.LabelFor(model => model.Birthday, new { @class = "col-form-label" })
+            @Html.TextBoxFor(model => model.Birthday, new { @class = "form-control", @type = "date", @id = "Birthday" })
+        </div>
+        <div class="row">
+            <br>
+            <div class="col-sm-offset-5 col-sm-6">
+                <button type="submit" class="btn btn-primary" onClick="checkForm();">新增 </button>
+            </div>
+        </div>
+    </div>
+</form>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" />
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
+
+<table id="TABLE1" class="table table-bordered table-striped" cellpadding="0" cellspacing="5">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Birthday</th>
+            <th></th>
+
+        </tr>
+    <thead>
+    <tbody>
+
+        @foreach (DataRow item in (ViewData["UserInfo"] as DataTable).Rows)
+        {
+        <tr>
+            <td>@item["UserName"]</td>
+            <td>@item["Age"]</td>
+            <td>@string.Format("{0:yyyy-MM-dd}", @item["birth"])</td>
+            @*<td>@item["birth"]</td>*@
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { username = @item["UserName"] }) |
+                @Html.ActionLink("Delete", "Delete", new { username = @item["UserName"] })
+            </td>
+
+        </tr>
+
+        }
+    </tbody>
+</table>
+<script>
+    function modify()
+    {
+
+    }
+    function deleteUser()
+    {
+        @*$.ajax({
+                type: "POST",
+                dataType: "Json",
+                contentType: "application/Json;charset=utf-8",
+                url:'@Url.Action("Delete", "Home")',
+                data: JSON.stringify({
+                    deletename: $('#leaveCode').val(),
+                }),
+                success: function (leaveData) {
+                    document.getElementById('leaveName1').value = leaveData.leaveName;
+                    document.getElementById('leaveRule').value = leaveData.rule;
+                    document.getElementById('Identification1').value = leaveData.identify;
+                }
+            });*@
+    }
+</script>
+@ViewBag.username
+@ViewBag.age
+@ViewBag.birth
+
